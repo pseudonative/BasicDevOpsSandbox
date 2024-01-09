@@ -76,10 +76,15 @@ module "eks" {
   eks_managed_node_group_defaults = {
     ami_type = "AL2_x86_64"
   }
+  # very important to allow sg to add LoadBalancer
+  node_security_group_tags = {
+    "kubernetes.io/cluster/${local.name}" = null
+  }
 
   tags = {
     "Environment" = "Production"
     "Project"     = "dev-ops-sandbox-role"
+    
   }
 }
 
@@ -91,7 +96,7 @@ module "node_group_private" {
   cluster_version = module.eks.cluster_version
 
   subnet_ids = var.private_subnets
-
+  
   cluster_primary_security_group_id = module.eks.cluster_primary_security_group_id
   vpc_security_group_ids            = [module.eks.node_security_group_id]
 
@@ -104,5 +109,6 @@ module "node_group_private" {
 
   labels = {
     AccessSpecifier = "private"
+    
   }
 }
