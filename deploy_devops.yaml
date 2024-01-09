@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: devops-sandbox-container
-        image: 520291287938.dkr.ecr.us-east-1.amazonaws.com/devops-app:v1.0.1
+        image: 520291287938.dkr.ecr.us-east-1.amazonaws.com/devops-app:v1.0.3
         ports:
         - containerPort: 80
 ---
