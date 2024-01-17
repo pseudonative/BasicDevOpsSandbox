@@ -29,4 +29,11 @@ jobs:
       run: |
         cd devops_app
         pytest
-
+    
+    - name: Build Docker Image
+      run: |
+        docker build -t sandbox -f Dockerfile .
+        
+    - name: Run Trivy vulnerability scanner
+      run: |
+        docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v $HOME/.cache:/root/.cache aquasec/trivy image --exit-code 1 --severity HIGH,CRITICAL sandbox
