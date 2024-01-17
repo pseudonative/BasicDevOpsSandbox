@@ -14,13 +14,19 @@ jobs:
       uses: actions/setup-python@v5
       with:
         python-version: '3.x'
+
     - name: Install dependencies
       run: |
         cd devops_app
         pip install -r requirements.txt
+
+    - name: Lint with flake8
+      run: |
+        cd devops_app
+        flake8 .
+        
     - name: Run tests
       run: |
         cd devops_app
         pytest
 
-      
