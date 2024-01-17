@@ -29,4 +29,8 @@ jobs:
       run: |
         cd devops_app
         pytest
-
+    
+    - name: Build Docker Image
+      run: |
+        docker build -t sandbox -f Dockerfile .
+        
